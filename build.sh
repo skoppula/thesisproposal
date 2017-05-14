@@ -10,6 +10,9 @@ bibtex $totalfile
 pdflatex --shell-escape -jobname=$totalfile paper.tex
 pdflatex --shell-escape -jobname=$totalfile paper.tex
 
+mkdir -p out
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out/${totalfile}-with-cover.pdf figs/filled_coversheet.pdf $totalfile.pdf
+
 if [ "$(uname)" == "Darwin" ]; then
     open ${totalfile}.pdf &
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
